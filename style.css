@@ -51,7 +51,7 @@ body {
 }
 
 .hero {
-  background: linear-gradient(to right, #3c1361, #9d4edd); 
+  background: linear-gradient(to right, #3c1361, #9d4edd);
   color: #fff;
   height: 100vh;
   display: flex;
@@ -125,7 +125,7 @@ body {
 }
 
 .project-card a {
-  color: #c084fc; 
+  color: #c084fc;
   text-decoration: none;
   font-weight: bold;
 }
