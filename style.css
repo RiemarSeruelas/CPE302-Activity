@@ -153,3 +153,67 @@ body {
   margin-top: 40px;
   color: #888;
 }
+
+.folder {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  border-radius: 16px;
+  background: #0d0d0d; 
+  box-shadow: 0 4px 12px rgba(0,0,0,0.8);
+  border: 1px solid #222; 
+}
+
+.folder h4 {
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  color: #bb86fc;
+  border-bottom: 2px solid #6a0dad; 
+  padding-bottom: 0.5rem;
+}
+
+.folder-contents {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.file {
+  flex: 1 1 200px; 
+  padding: 1.2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  background: #1a1a1a; 
+  border: 2px solid #6a0dad; 
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  color: #f5f5f5; 
+}
+
+.file:hover {
+  background: #6a0dad; 
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(106, 13, 173, 0.6); 
+}
+
+.about-container {
+  display: flex;
+  align-items: center;       /* aligns vertically */
+  justify-content: flex-start;
+  gap: 1.5rem;               /* smaller gap between photo and text */
+  max-width: 1000px;          /* keeps everything closer together */
+  margin: 0 auto;            /* centers inside the section */
+  text-align: left;
+}
+  
+.about-photo {
+  width: 200px;       
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #6a0dad; 
+  box-shadow: 0 6px 16px rgba(0,0,0,0.7);
+}

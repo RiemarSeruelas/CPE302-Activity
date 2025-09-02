@@ -1,22 +1,60 @@
-const username = "RiemarSeruelas"; 
+const username = "RiemarSeruelas";
+const repo = "CPE302-Activity"; 
+const branch = "main";          
+
 const projectsGrid = document.getElementById("projects-grid");
 
-fetch(`https://api.github.com/users/${username}/repos?sort=updated`)
-  .then(response => response.json())
-  .then(repos => {
-    repos.forEach(repo => {
-      if (repo.fork) return;
+async function fetchRepoContents(path = "") {
+  const url = `https://api.github.com/repos/${username}/${repo}/contents/${path}?ref=${branch}`;
+  const response = await fetch(url);
+  return response.json();
+}
 
-      const card = document.createElement("div");
-      card.classList.add("project-card");
+function createFileElement(item, path) {
+  const fileLink = document.createElement("button");
+  fileLink.textContent = item.name;
+  fileLink.classList.add("file");
 
-      card.innerHTML = `
-        <h4>${repo.name}</h4>
-        <p>${repo.description ? repo.description : "No description provided."}</p>
-        <a href="${repo.html_url}" target="_blank">View on GitHub</a>
-      `;
+  fileLink.onclick = () => {
+    const pageUrl = `https://${username}.github.io/${repo}/${path}${item.name}`;
+    window.open(pageUrl, "_blank");
+  };
 
-      projectsGrid.appendChild(card);
-    });
-  })
-  .catch(error => console.error("Error fetching repos:", error));
+  return fileLink;
+}
+
+async function createFolderElement(item) {
+  const folderDiv = document.createElement("div");
+  folderDiv.classList.add("folder");
+
+  const folderTitle = document.createElement("h4");
+  folderTitle.textContent = `📂 ${item.name}`;
+  folderDiv.appendChild(folderTitle);
+
+  const folderContents = document.createElement("div");
+  folderContents.classList.add("folder-contents");
+  folderDiv.appendChild(folderContents);
+
+  const contents = await fetchRepoContents(item.path);
+
+  contents.forEach(child => {
+    if (child.type === "file" && child.name.endsWith(".html")) {
+      folderContents.appendChild(createFileElement(child, item.path + "/"));
+    }
+  });
+
+  return folderDiv;
+}
+
+async function loadProjects() {
+  const rootContents = await fetchRepoContents();
+
+  for (const item of rootContents) {
+    if (item.type === "dir") {
+      const folderElement = await createFolderElement(item);
+      projectsGrid.appendChild(folderElement);
+    }
+  }
+}
+
+loadProjects();
