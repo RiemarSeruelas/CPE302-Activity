@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Activity 2.3</title>
+</head>
+<frameset rows="100,*">
+    </frameset>
+</frameset>
+</html>
